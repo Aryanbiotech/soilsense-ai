@@ -264,42 +264,217 @@ with col2:
     )
 
 # Functions
+
 def recommend_crop():
 
-    if ("Clayey" in soil_texture or "चिकनी" in soil_texture or "ਚਿਕਣੀ" in soil_texture) and rainfall > 180:
+    scores = {
+        "Wheat": 0,
+        "Rice": 0,
+        "Potato": 0,
+        "Maize": 0,
+        "Sugarcane": 0,
+        "Groundnut": 0,
+        "Cotton": 0,
+        "Jute": 0
+    }
+
+    # -------------------------
+    # Base Climate Suitability
+    # -------------------------
+
+    # Wheat
+    if 15 <= temp <= 25:
+        scores["Wheat"] += 25
+    if 50 <= rainfall <= 120:
+        scores["Wheat"] += 20
+
+    # Rice
+    if rainfall > 180:
+        scores["Rice"] += 30
+    if humidity > 70:
+        scores["Rice"] += 20
+    if temp >= 22:
+        scores["Rice"] += 15
+
+    # Potato
+    if 15 <= temp <= 22:
+        scores["Potato"] += 30
+    if temp < 28:
+        scores["Potato"] += 10
+
+    # Maize
+    if 20 <= temp <= 32:
+        scores["Maize"] += 25
+    if rainfall >= 60:
+        scores["Maize"] += 15
+
+    # Sugarcane
+    if temp >= 25:
+        scores["Sugarcane"] += 25
+    if rainfall >= 120:
+        scores["Sugarcane"] += 25
+
+    # Groundnut
+    if rainfall < 100:
+        scores["Groundnut"] += 25
+    if 20 <= temp <= 32:
+        scores["Groundnut"] += 10
+
+    # Cotton
+    if temp >= 24:
+        scores["Cotton"] += 25
+
+    # Jute
+    if humidity > 80:
+        scores["Jute"] += 30
+    if rainfall > 150:
+        scores["Jute"] += 25
+
+    # -------------------------
+    # Nutrient Effects
+    # -------------------------
+
+    if N > 80:
+        scores["Maize"] += 20
+        scores["Wheat"] += 10
+
+    if P > 60:
+        scores["Groundnut"] += 15
+        scores["Sugarcane"] += 10
+
+    if K > 60:
+        scores["Sugarcane"] += 20
+        scores["Potato"] += 10
+
+    # -------------------------
+    # pH Effects
+    # -------------------------
+
+    if 6.0 <= ph <= 7.5:
+        scores["Wheat"] += 15
+        scores["Maize"] += 10
+
+    if ph < 6.5:
+        scores["Potato"] += 20
+
+    # -------------------------
+    # Soil Organic Carbon
+    # -------------------------
+
+    if soc >= 0.75:
+        scores["Wheat"] += 10
+        scores["Potato"] += 10
+        scores["Maize"] += 10
+
+    elif soc < 0.40:
+        scores["Sugarcane"] -= 10
+        scores["Rice"] -= 10
+
+    # -------------------------
+    # Microbial Activity
+    # -------------------------
+
+    if micro >= 7:
+        for crop in scores:
+            scores[crop] += 5
+
+    elif micro < 4:
+        scores["Sugarcane"] -= 10
+        scores["Rice"] -= 10
+        scores["Maize"] -= 5
+
+    # -------------------------
+    # Soil Texture
+    # -------------------------
+
+    if "Loamy" in soil_texture:
+        scores["Wheat"] += 20
+        scores["Potato"] += 15
+        scores["Maize"] += 15
+
+    if "Clayey" in soil_texture:
+        scores["Rice"] += 25
+
+    if "Sandy" in soil_texture:
+        scores["Groundnut"] += 20
+        scores["Potato"] += 10
+
+    if "Sandy Loam" in soil_texture:
+        scores["Potato"] += 20
+        scores["Groundnut"] += 10
+
+    # -------------------------
+    # Soil Type
+    # -------------------------
+
+    if "Alluvial" in soil_type:
+        scores["Wheat"] += 20
+        scores["Rice"] += 15
+        scores["Maize"] += 15
+        scores["Sugarcane"] += 15
+
+    if "Black" in soil_type:
+        scores["Cotton"] += 30
+        scores["Sugarcane"] += 15
+
+    if "Red" in soil_type:
+        scores["Groundnut"] += 25
+
+    # -------------------------
+    # Water Stress Penalty
+    # -------------------------
+
+    if rainfall < 60:
+        scores["Rice"] -= 25
+        scores["Sugarcane"] -= 20
+        scores["Jute"] -= 15
+
+    # -------------------------
+    # Crop Rotation Penalty
+    # -------------------------
+
+    if "Wheat" in previous_crop:
+        scores["Wheat"] -= 15
+
+    if "Rice" in previous_crop:
+        scores["Rice"] -= 15
+
+    if "Potato" in previous_crop:
+        scores["Potato"] -= 15
+
+    if "Maize" in previous_crop:
+        scores["Maize"] -= 15
+
+    # -------------------------
+    # Final Selection
+    # -------------------------
+
+    best_crop = max(scores, key=scores.get)
+
+    if best_crop == "Wheat":
+        return tr("Wheat","गेहूं","ਗੇਂਹੂ")
+
+    elif best_crop == "Rice":
         return tr("Rice","चावल","ਚੌਲ")
 
-    elif ph < 6.0 and temp < 28 and (
-        "Loamy" in soil_texture or "दोमट" in soil_texture or "ਦੋਮਟ" in soil_texture
-    ):
+    elif best_crop == "Potato":
         return tr("Potato","आलू","ਆਲੂ")
 
-    elif N > 90 and temp > 22 and (
-        "Alluvial" in soil_type or "जलोढ़" in soil_type or "ਜਲੋੜ" in soil_type
-    ):
+    elif best_crop == "Maize":
         return tr("Maize","मक्का","ਮੱਕੀ")
 
-    elif P > 60 and K > 60 and (
-        "Alluvial" in soil_type or "Black" in soil_type
-    ):
+    elif best_crop == "Sugarcane":
         return tr("Sugarcane","गन्ना","ਗੰਨਾ")
 
-    elif (
-        "Sandy" in soil_texture or "रेतीली" in soil_texture or "ਰੇਤੀਲੀ" in soil_texture
-        or "Red" in soil_type or "लाल" in soil_type or "ਲਾਲ" in soil_type
-    ):
+    elif best_crop == "Groundnut":
         return tr("Groundnut","मूंगफली","ਮੂੰਗਫਲੀ")
 
-    elif (
-        "Black" in soil_type or "काली" in soil_type or "ਕਾਲੀ" in soil_type
-    ):
+    elif best_crop == "Cotton":
         return tr("Cotton","कपास","ਕਪਾਹ")
 
-    elif humidity > 80 and rainfall > 150:
+    else:
         return tr("Jute","जूट","ਜੂਟ")
 
-    else:
-        return tr("Wheat","गेहूं","ਗੇਂਹੂ")
 
 def soil_score():
     score = 100
