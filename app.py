@@ -138,19 +138,41 @@ voice_query = st.text_input(
 col1, col2 = st.columns(2)
 
 with col1:
-    N = st.number_input("Nitrogen",0,150,50)
-    P = st.number_input("Phosphorus",0,150,50)
-    K = st.number_input("Potassium",0,150,50)
-    ph = st.number_input("pH",0.0,14.0,6.5)
-    soc = st.number_input("Soil Organic Carbon",0.0,2.0,0.6)
+    N = st.number_input(tr("Nitrogen","नाइट्रोजन","ਨਾਈਟ੍ਰੋਜਨ"),0,150,50)
 
+    P = st.number_input(tr("Phosphorus","फास्फोरस","ਫਾਸਫੋਰਸ"),0,150,50)
+
+    K = st.number_input(tr("Potassium","पोटैशियम","ਪੋਟਾਸਿਯਮ"),0,150,50)
+
+    ph = st.number_input(tr("pH","पीएच","ਪੀਐਚ"),0.0,14.0,6.5)
+
+    soc = st.number_input(
+        tr("Soil Organic Carbon","मृदा कार्बन","ਮਿੱਟੀ ਕਾਰਬਨ"),
+        0.0,2.0,0.6
+    )
 with col2:
-    temp = st.number_input("Temperature",0,50,25)
-    humidity = st.number_input("Humidity",0,100,60)
-    rainfall = st.number_input("Rainfall",0,300,100)
-    micro = st.number_input("Microbial Activity",1,10,5)
+    temp = st.number_input(
+        tr("Temperature","तापमान","ਤਾਪਮਾਨ"),
+        0,50,25
+    )
+
+    humidity = st.number_input(
+        tr("Humidity","आर्द्रता","ਨਮੀ"),
+        0,100,60
+    )
+
+    rainfall = st.number_input(
+        tr("Rainfall","वर्षा","ਬਰਸਾਤ"),
+        0,300,100
+    )
+
+    micro = st.number_input(
+        tr("Microbial Activity","सूक्ष्मजीव सक्रियता","ਸੂਖਮਜੀਵ ਸਰਗਰਮੀ"),
+        1,10,5
+    )
+
     previous_crop = st.selectbox(
-        "Previous Crop",
+        tr("Previous Crop","पिछली फसल","ਪਿਛਲੀ ਫਸਲ"),
         ["wheat","rice","pea","potato","maize"]
     )
 
