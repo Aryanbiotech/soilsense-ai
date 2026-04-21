@@ -71,7 +71,7 @@ div[data-baseweb="select"] > div {
     border: 1px solid #444 !important;
 }
 
-/* Selected value */
+/* Dropdown selected text */
 div[data-baseweb="select"] span,
 div[data-baseweb="select"] svg,
 div[data-baseweb="select"] * {
@@ -79,7 +79,7 @@ div[data-baseweb="select"] * {
     fill: white !important;
 }
 
-/* Dropdown popup container */
+/* Dropdown popup */
 div[role="listbox"],
 ul[role="listbox"],
 [data-baseweb="menu"] {
@@ -96,13 +96,13 @@ ul[role="listbox"] li,
     color: white !important;
 }
 
-/* Hover / selected */
+/* Hover */
 li[role="option"]:hover,
 ul[role="listbox"] li:hover {
     background-color: #1f2937 !important;
 }
 
-/* Metrics */
+/* Metric cards */
 div[data-testid="metric-container"] {
     background-color: #1e293b !important;
     padding: 15px;
@@ -115,11 +115,13 @@ div[data-testid="metric-container"] {
 # Title
 st.title("🌱 SoilSense AI+")
 
+# Language Selector
 language = st.selectbox(
     "Select Language / भाषा / ਭਾਸ਼ਾ",
-    ["English", "Hindi", "Punjabi"]
+    ["English", "हिंदी", "ਪੰਜਾਬੀ"]
 )
 
+# Translation Function
 def tr(en, hi, pa):
     if language == "हिंदी":
         return hi
@@ -127,6 +129,16 @@ def tr(en, hi, pa):
         return pa
     return en
 
+# Crop Options
+crop_options = [
+    tr("Wheat", "गेहूं", "ਗੇਂਹੂ"),
+    tr("Rice", "चावल", "ਚੌਲ"),
+    tr("Pea", "मटर", "ਮਟਰ"),
+    tr("Potato", "आलू", "ਆਲੂ"),
+    tr("Maize", "मक्का", "ਮੱਕੀ")
+]
+
+# Subtitle
 st.subheader(
     tr(
         "Bio Integrated Soil Decision System",
@@ -135,6 +147,7 @@ st.subheader(
     )
 )
 
+# Assistant
 st.subheader(
     tr(
         "🎤 Smart Assistant",
@@ -156,33 +169,18 @@ col1, col2 = st.columns(2)
 
 with col1:
     N = st.number_input(tr("Nitrogen","नाइट्रोजन","ਨਾਈਟ੍ਰੋਜਨ"),0,150,50)
-
     P = st.number_input(tr("Phosphorus","फास्फोरस","ਫਾਸਫੋਰਸ"),0,150,50)
-
     K = st.number_input(tr("Potassium","पोटैशियम","ਪੋਟਾਸਿਯਮ"),0,150,50)
-
     ph = st.number_input(tr("pH","पीएच","ਪੀਐਚ"),0.0,14.0,6.5)
-
     soc = st.number_input(
         tr("Soil Organic Carbon","मृदा कार्बन","ਮਿੱਟੀ ਕਾਰਬਨ"),
         0.0,2.0,0.6
     )
+
 with col2:
-    temp = st.number_input(
-        tr("Temperature","तापमान","ਤਾਪਮਾਨ"),
-        0,50,25
-    )
-
-    humidity = st.number_input(
-        tr("Humidity","आर्द्रता","ਨਮੀ"),
-        0,100,60
-    )
-
-    rainfall = st.number_input(
-        tr("Rainfall","वर्षा","ਬਰਸਾਤ"),
-        0,300,100
-    )
-
+    temp = st.number_input(tr("Temperature","तापमान","ਤਾਪਮਾਨ"),0,50,25)
+    humidity = st.number_input(tr("Humidity","आर्द्रता","ਨਮੀ"),0,100,60)
+    rainfall = st.number_input(tr("Rainfall","वर्षा","ਬਰਸਾਤ"),0,300,100)
     micro = st.number_input(
         tr("Microbial Activity","सूक्ष्मजीव सक्रियता","ਸੂਖਮਜੀਵ ਸਰਗਰਮੀ"),
         1,10,5
@@ -190,23 +188,23 @@ with col2:
 
     previous_crop = st.selectbox(
         tr("Previous Crop","पिछली फसल","ਪਿਛਲੀ ਫਸਲ"),
-        ["wheat","rice","pea","potato","maize"]
+        crop_options
     )
 
 # Functions
 def recommend_crop():
     if rainfall > 220 and humidity > 75:
-        return "Rice"
+        return tr("Rice","चावल","ਚੌਲ")
     elif ph < 6.0 and temp < 28:
-        return "Potato"
+        return tr("Potato","आलू","ਆਲੂ")
     elif N > 90 and temp > 22:
-        return "Maize"
+        return tr("Maize","मक्का","ਮੱਕੀ")
     elif humidity > 80 and rainfall > 150:
-        return "Jute"
+        return tr("Jute","जूट","ਜੂਟ")
     elif P > 60 and K > 60:
-        return "Sugarcane"
+        return tr("Sugarcane","गन्ना","ਗੰਨਾ")
     else:
-        return "Wheat"
+        return tr("Wheat","गेहूं","ਗੇਂਹੂ")
 
 def soil_score():
     score = 100
@@ -227,56 +225,120 @@ def soil_score():
     return max(score,0)
 
 # Main Button
-if st.button("Analyze Soil"):
+if st.button(tr("Analyze Soil","मिट्टी जांचें","ਮਿੱਟੀ ਵਿਸ਼ਲੇਸ਼ਣ")):
 
     crop = recommend_crop()
     score = soil_score()
 
-    st.success(f"Recommended Crop: {crop}")
-    st.metric("Soil Health Score", score)
+    st.success(
+        tr(
+            f"Recommended Crop: {crop}",
+            f"अनुशंसित फसल: {crop}",
+            f"ਸਿਫਾਰਸ਼ੀ ਫਸਲ: {crop}"
+        )
+    )
+
+    st.metric(
+        tr("Soil Health Score","मिट्टी स्वास्थ्य स्कोर","ਮਿੱਟੀ ਸਿਹਤ ਸਕੋਰ"),
+        score
+    )
 
     if score > 85:
-        st.info("Healthy Soil")
+        st.info(tr("Healthy Soil","स्वस्थ मिट्टी","ਤੰਦਰੁਸਤ ਮਿੱਟੀ"))
     elif score > 65:
-        st.warning("Moderate Soil")
+        st.warning(tr("Moderate Soil","मध्यम मिट्टी","ਦਰਮਿਆਨੀ ਮਿੱਟੀ"))
     else:
-        st.error("Poor Soil")
+        st.error(tr("Poor Soil","कमज़ोर मिट्टी","ਕਮਜ਼ੋਰ ਮਿੱਟੀ"))
 
-    # Recommendations
-    st.subheader("Recommendations")
+    st.subheader(
+        tr("Recommendations","सिफारिशें","ਸਿਫਾਰਸ਼ਾਂ")
+    )
 
     if soc < 0.5:
-        st.write("✅ Add compost")
+        st.write(tr("✅ Add compost","✅ कम्पोस्ट डालें","✅ ਖਾਦ ਪਾਓ"))
 
     if micro < 4:
-        st.write("✅ Use biofertilizer")
+        st.write(
+            tr(
+                "✅ Use biofertilizer",
+                "✅ जैव उर्वरक उपयोग करें",
+                "✅ ਜੈਵ ਖਾਦ ਵਰਤੋ"
+            )
+        )
 
     if previous_crop.lower() == crop.lower():
-        st.write("✅ Change crop rotation")
+        st.write(
+            tr(
+                "✅ Change crop rotation",
+                "✅ फसल चक्र बदलें",
+                "✅ ਫਸਲ ਚੱਕਰ ਬਦਲੋ"
+            )
+        )
 
-    st.write("✅ Optimize irrigation")
+    st.write(
+        tr(
+            "✅ Optimize irrigation",
+            "✅ सिंचाई सुधारें",
+            "✅ ਸਿੰਚਾਈ ਸੁਧਾਰੋ"
+        )
+    )
 
     # Chart
     chart_data = pd.DataFrame({
-        "Nutrient": ["Nitrogen","Phosphorus","Potassium"],
-        "Value": [N,P,K]
+        "Nutrient": [
+            tr("Nitrogen","नाइट्रोजन","ਨਾਈਟ੍ਰੋਜਨ"),
+            tr("Phosphorus","फास्फोरस","ਫਾਸਫੋਰਸ"),
+            tr("Potassium","पोटैशियम","ਪੋਟਾਸਿਯਮ")
+        ],
+        "Value": [N, P, K]
     })
 
-    st.subheader("NPK Nutrient Chart")
+    st.subheader(
+        tr(
+            "NPK Nutrient Chart",
+            "NPK पोषक चार्ट",
+            "NPK ਪੋਸ਼ਕ ਚਾਰਟ"
+        )
+    )
+
     st.bar_chart(chart_data.set_index("Nutrient"))
 
-    # Voice Assistant
+    # Assistant
     if voice_query:
-        st.subheader("Assistant Response")
+        st.subheader(
+            tr(
+                "Assistant Response",
+                "सहायक उत्तर",
+                "ਸਹਾਇਕ ਜਵਾਬ"
+            )
+        )
 
         if "crop" in voice_query.lower():
-            st.write(f"Recommended crop is {crop}")
+            st.write(
+                tr(
+                    f"Recommended crop is {crop}",
+                    f"अनुशंसित फसल {crop} है",
+                    f"ਸਿਫਾਰਸ਼ੀ ਫਸਲ {crop} ਹੈ"
+                )
+            )
 
         elif "soil" in voice_query.lower():
-            st.write(f"Soil health score is {score}")
+            st.write(
+                tr(
+                    f"Soil health score is {score}",
+                    f"मिट्टी स्वास्थ्य स्कोर {score} है",
+                    f"ਮਿੱਟੀ ਸਿਹਤ ਸਕੋਰ {score} ਹੈ"
+                )
+            )
 
         else:
-            st.write("Please ask about crop or soil.")
+            st.write(
+                tr(
+                    "Please ask about crop or soil.",
+                    "कृपया फसल या मिट्टी के बारे में पूछें।",
+                    "ਕਿਰਪਾ ਕਰਕੇ ਫਸਲ ਜਾਂ ਮਿੱਟੀ ਬਾਰੇ ਪੁੱਛੋ।"
+                )
+            )
 
     # Download Report
     report = f"""
@@ -295,7 +357,11 @@ Previous Crop: {previous_crop}
 """
 
     st.download_button(
-        label="Download Soil Report",
+        label=tr(
+            "Download Soil Report",
+            "रिपोर्ट डाउनलोड करें",
+            "ਰਿਪੋਰਟ ਡਾਊਨਲੋਡ ਕਰੋ"
+        ),
         data=report,
         file_name="SoilSense_Report.txt",
         mime="text/plain"
