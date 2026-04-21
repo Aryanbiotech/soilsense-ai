@@ -121,9 +121,9 @@ language = st.selectbox(
 )
 
 def tr(en, hi, pa):
-    if language == "Hindi":
+    if language == "हिंदी":
         return hi
-    elif language == "Punjabi":
+    elif language == "ਪੰਜਾਬੀ":
         return pa
     return en
 
