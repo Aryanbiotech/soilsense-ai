@@ -168,21 +168,51 @@ voice_query = st.text_input(
 col1, col2 = st.columns(2)
 
 with col1:
-    N = st.number_input(tr("Nitrogen","नाइट्रोजन","ਨਾਈਟ੍ਰੋਜਨ"),0,150,50)
-    P = st.number_input(tr("Phosphorus","फास्फोरस","ਫਾਸਫੋਰਸ"),0,150,50)
-    K = st.number_input(tr("Potassium","पोटैशियम","ਪੋਟਾਸਿਯਮ"),0,150,50)
-    ph = st.number_input(tr("pH","पीएच","ਪੀਐਚ"),0.0,14.0,6.5)
+    N = st.number_input(
+        tr("Nitrogen (kg/ha)","नाइट्रोजन (कि.ग्रा./हे.)","ਨਾਈਟ੍ਰੋਜਨ (ਕਿ.ਗ੍ਰਾ./ਹੇ.)"),
+        0,150,50
+    )
+
+    P = st.number_input(
+        tr("Phosphorus (kg/ha)","फास्फोरस (कि.ग्रा./हे.)","ਫਾਸਫੋਰਸ (ਕਿ.ਗ੍ਰਾ./ਹੇ.)"),
+        0,150,50
+    )
+
+    K = st.number_input(
+        tr("Potassium (kg/ha)","पोटैशियम (कि.ग्रा./हे.)","ਪੋਟਾਸਿਯਮ (ਕਿ.ਗ੍ਰਾ./ਹੇ.)"),
+        0,150,50
+    )
+
+    ph = st.number_input(
+        tr("pH","पीएच","ਪੀਐਚ"),
+        0.0,14.0,6.5
+    )
+
     soc = st.number_input(
-        tr("Soil Organic Carbon","मृदा कार्बन","ਮਿੱਟੀ ਕਾਰਬਨ"),
+        tr("Soil Organic Carbon (%)","मृदा कार्बन (%)","ਮਿੱਟੀ ਕਾਰਬਨ (%)"),
         0.0,2.0,0.6
     )
 
 with col2:
-    temp = st.number_input(tr("Temperature","तापमान","ਤਾਪਮਾਨ"),0,50,25)
-    humidity = st.number_input(tr("Humidity","आर्द्रता","ਨਮੀ"),0,100,60)
-    rainfall = st.number_input(tr("Rainfall","वर्षा","ਬਰਸਾਤ"),0,300,100)
+    temp = st.number_input(
+        tr("Temperature (°C)","तापमान (°C)","ਤਾਪਮਾਨ (°C)"),
+        0,50,25
+    )
+
+    humidity = st.number_input(
+        tr("Humidity (%)","आर्द्रता (%)","ਨਮੀ (%)"),
+        0,100,60
+    )
+
+    rainfall = st.number_input(
+        tr("Rainfall (cm)","वर्षा (सेमी)","ਬਰਸਾਤ (ਸੈ.ਮੀ.)"),
+        0,300,100
+    )
+
     micro = st.number_input(
-        tr("Microbial Activity","सूक्ष्मजीव सक्रियता","ਸੂਖਮਜੀਵ ਸਰਗਰਮੀ"),
+        tr("Microbial Activity Index (1-10)",
+           "सूक्ष्मजीव सक्रियता सूचकांक (1-10)",
+           "ਸੂਖਮਜੀਵ ਸਰਗਰਮੀ ਸੂਚਕਾਂਕ (1-10)"),
         1,10,5
     )
 
