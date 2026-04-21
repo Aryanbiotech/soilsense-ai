@@ -7,43 +7,38 @@ st.set_page_config(page_title="SoilSense AI+", layout="wide")
 st.markdown("""
 <style>
 
-/* Main app background */
+/* Main background */
 .stApp {
     background-color: #0b1220;
 }
 
-/* Full page faded crop icons */
+/* Background icons */
 .stApp::before {
     content:
-    "🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 \A
-     🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾 🌿 \A
-     🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱 \A
-     🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 \A
-     🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾 🌿 \A
-     🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱";
+    "🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 \A
+     🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾 \A
+     🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 \A
+     🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽";
     white-space: pre;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    font-size: 34px;
+    inset: 0;
+    font-size: 32px;
     line-height: 3;
-    word-spacing: 40px;
-    opacity: 0.07;
+    word-spacing: 35px;
+    opacity: 0.06;
     z-index: 0;
     pointer-events: none;
     padding: 20px;
 }
 
-/* Keep content above background */
+/* Content above background */
 .main * {
     position: relative;
     z-index: 1;
 }
 
-/* Text color */
-h1, h2, h3, label, p, div, span {
+/* Text */
+h1,h2,h3,label,p,div,span {
     color: white !important;
 }
 
@@ -52,20 +47,18 @@ h1, h2, h3, label, p, div, span {
     background-color: #2e7d32 !important;
     color: white !important;
     border-radius: 10px;
-    height: 3em;
-    width: 100%;
     border: none;
+    width: 100%;
 }
 
-/* Number input boxes */
-div[data-testid="stNumberInput"] input {
+/* Inputs */
+input, textarea {
     background-color: #1e293b !important;
     color: white !important;
-    border-radius: 8px;
 }
 
-/* Text input box */
-input[type="text"] {
+/* Number boxes */
+div[data-testid="stNumberInput"] input {
     background-color: #1e293b !important;
     color: white !important;
 }
@@ -74,34 +67,42 @@ input[type="text"] {
 div[data-baseweb="select"] > div {
     background-color: #000000 !important;
     color: white !important;
-    border: 1px solid #444 !important;
     border-radius: 8px !important;
+    border: 1px solid #444 !important;
 }
 
-/* Dropdown text */
+/* Selected value */
 div[data-baseweb="select"] span,
+div[data-baseweb="select"] svg,
 div[data-baseweb="select"] * {
     color: white !important;
     fill: white !important;
 }
 
-/* Dropdown popup menu */
-ul[role="listbox"] {
+/* Dropdown popup container */
+div[role="listbox"],
+ul[role="listbox"],
+[data-baseweb="menu"] {
     background-color: #000000 !important;
+    color: white !important;
 }
 
 /* Dropdown options */
-ul[role="listbox"] li {
-    color: white !important;
+li[role="option"],
+ul[role="listbox"] li,
+[data-baseweb="menu"] li,
+[data-baseweb="menu"] div {
     background-color: #000000 !important;
+    color: white !important;
 }
 
-/* Hover on dropdown options */
+/* Hover / selected */
+li[role="option"]:hover,
 ul[role="listbox"] li:hover {
     background-color: #1f2937 !important;
 }
 
-/* Metric cards */
+/* Metrics */
 div[data-testid="metric-container"] {
     background-color: #1e293b !important;
     padding: 15px;
