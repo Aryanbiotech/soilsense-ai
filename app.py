@@ -7,21 +7,26 @@ st.set_page_config(page_title="SoilSense AI+", layout="wide")
 st.markdown("""
 <style>
 
-/* Main background */
+/* Main app background */
 .stApp {
     background-color: #0b1220;
 }
 
-/* Full page faded icons */
+/* Full page faded crop icons */
 .stApp::before {
     content:
     "🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 \A
      🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾 🌿 \A
      🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱 \A
-     🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿";
+     🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 \A
+     🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾 🌿 \A
+     🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱";
     white-space: pre;
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     font-size: 34px;
     line-height: 3;
     word-spacing: 40px;
@@ -31,13 +36,13 @@ st.markdown("""
     padding: 20px;
 }
 
-/* Keep content above */
+/* Keep content above background */
 .main * {
     position: relative;
     z-index: 1;
 }
 
-/* Text */
+/* Text color */
 h1, h2, h3, label, p, div, span {
     color: white !important;
 }
@@ -52,37 +57,48 @@ h1, h2, h3, label, p, div, span {
     border: none;
 }
 
-/* Inputs */
-input, textarea {
+/* Number input boxes */
+div[data-testid="stNumberInput"] input {
+    background-color: #1e293b !important;
+    color: white !important;
+    border-radius: 8px;
+}
+
+/* Text input box */
+input[type="text"] {
     background-color: #1e293b !important;
     color: white !important;
 }
 
-/* Dropdown container */
+/* Dropdown main box */
 div[data-baseweb="select"] > div {
-    background-color: #1e293b !important;
+    background-color: #000000 !important;
     color: white !important;
+    border: 1px solid #444 !important;
+    border-radius: 8px !important;
 }
 
-/* Selected text inside dropdown */
+/* Dropdown text */
+div[data-baseweb="select"] span,
 div[data-baseweb="select"] * {
     color: white !important;
     fill: white !important;
 }
 
-/* Dropdown menu popup options */
+/* Dropdown popup menu */
 ul[role="listbox"] {
-    background-color: #1e293b !important;
+    background-color: #000000 !important;
 }
 
+/* Dropdown options */
 ul[role="listbox"] li {
     color: white !important;
+    background-color: #000000 !important;
 }
 
-/* Number inputs */
-div[data-testid="stNumberInput"] input {
-    background-color: #1e293b !important;
-    color: white !important;
+/* Hover on dropdown options */
+ul[role="listbox"] li:hover {
+    background-color: #1f2937 !important;
 }
 
 /* Metric cards */
