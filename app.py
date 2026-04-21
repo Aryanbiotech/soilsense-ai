@@ -24,10 +24,27 @@ with col2:
         ["wheat","rice","pea","potato","maize"]
     )
 
-if st.button("Analyze Soil"):
+def recommend_crop():
+    if rainfall > 200:
+        return "Rice"
+    elif ph < 6:
+        return "Potato"
+    elif N > 80:
+        return "Maize"
+    elif humidity > 75:
+        return "Jute"
+    else:
+        return "Wheat"
 
+def soil_score():
     score = 100
 
+    if N < 40:
+        score -= 10
+    if P < 30:
+        score -= 10
+    if K < 30:
+        score -= 10
     if ph < 5.5 or ph > 8:
         score -= 15
     if soc < 0.5:
@@ -35,8 +52,14 @@ if st.button("Analyze Soil"):
     if micro < 4:
         score -= 15
 
-    st.success("Recommended Crop: Potato")
+    return max(score,0)
 
+if st.button("Analyze Soil"):
+
+    crop = recommend_crop()
+    score = soil_score()
+
+    st.success(f"Recommended Crop: {crop}")
     st.metric("Soil Health Score", score)
 
     if score > 85:
@@ -47,6 +70,14 @@ if st.button("Analyze Soil"):
         st.error("Poor Soil")
 
     st.subheader("Recommendations")
-    st.write("✅ Add compost regularly")
-    st.write("✅ Use biofertilizer")
-    st.write("✅ Follow crop rotation")
+
+    if soc < 0.5:
+        st.write("✅ Add compost")
+
+    if micro < 4:
+        st.write("✅ Use biofertilizer")
+
+    if previous_crop.lower() == crop.lower():
+        st.write("✅ Change crop rotation")
+
+    st.write("✅ Optimize irrigation")
