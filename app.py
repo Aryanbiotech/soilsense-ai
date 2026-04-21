@@ -8,17 +8,27 @@ st.markdown("""
 <style>
 .stApp {
     background-color: #0b1220;
-    background-image:
-        url("data:image/svg+xml;utf8,
-        <svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'>
-        <text x='20' y='40' font-size='28' fill='rgba(255,255,255,0.14)'>🌾</text>
-        <text x='140' y='80' font-size='26' fill='rgba(255,255,255,0.14)'>🌱</text>
-        <text x='60' y='150' font-size='28' fill='rgba(255,255,255,0.14)'>🥔</text>
-        <text x='160' y='180' font-size='26' fill='rgba(255,255,255,0.14)'>🌽</text>
-        </svg>");
-    background-repeat: repeat;
-    background-size: 220px 220px;
-    color: white;
+}
+
+.stApp::before {
+    content: "🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 38px;
+    opacity: 0.08;
+    z-index: 0;
+    pointer-events: none;
+    line-height: 3;
+    word-spacing: 55px;
+    padding: 40px;
+}
+
+.main * {
+    position: relative;
+    z-index: 1;
 }
 
 h1, h2, h3, label, p, div {
