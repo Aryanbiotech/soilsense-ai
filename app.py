@@ -6,12 +6,24 @@ st.set_page_config(page_title="SoilSense AI+", layout="wide")
 # Styling
 st.markdown("""
 <style>
-.main {
+.stApp {
     background-color: #f5f7f9;
+    background-image:
+        url("data:image/svg+xml;utf8,
+        <svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'>
+        <text x='20' y='40' font-size='28' fill='rgba(34,139,34,0.08)'>🌾</text>
+        <text x='140' y='80' font-size='26' fill='rgba(34,139,34,0.08)'>🌱</text>
+        <text x='60' y='150' font-size='28' fill='rgba(34,139,34,0.08)'>🥔</text>
+        <text x='160' y='180' font-size='26' fill='rgba(34,139,34,0.08)'>🌽</text>
+        </svg>");
+    background-repeat: repeat;
+    background-size: 220px 220px;
 }
+
 h1 {
     color: #1b5e20;
 }
+
 .stButton>button {
     background-color: #2e7d32;
     color: white;
