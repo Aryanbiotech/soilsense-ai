@@ -248,16 +248,39 @@ with col2:
 
 # Functions
 def recommend_crop():
-    if rainfall > 220 and humidity > 75:
+
+    if ("Clayey" in soil_texture or "चिकनी" in soil_texture or "ਚਿਕਣੀ" in soil_texture) and rainfall > 180:
         return tr("Rice","चावल","ਚੌਲ")
-    elif ph < 6.0 and temp < 28:
+
+    elif ph < 6.0 and temp < 28 and (
+        "Loamy" in soil_texture or "दोमट" in soil_texture or "ਦੋਮਟ" in soil_texture
+    ):
         return tr("Potato","आलू","ਆਲੂ")
-    elif N > 90 and temp > 22:
+
+    elif N > 90 and temp > 22 and (
+        "Alluvial" in soil_type or "जलोढ़" in soil_type or "ਜਲੋੜ" in soil_type
+    ):
         return tr("Maize","मक्का","ਮੱਕੀ")
+
+    elif P > 60 and K > 60 and (
+        "Alluvial" in soil_type or "Black" in soil_type
+    ):
+        return tr("Sugarcane","गन्ना","ਗੰਨਾ")
+
+    elif (
+        "Sandy" in soil_texture or "रेतीली" in soil_texture or "ਰੇਤੀਲੀ" in soil_texture
+        or "Red" in soil_type or "लाल" in soil_type or "ਲਾਲ" in soil_type
+    ):
+        return tr("Groundnut","मूंगफली","ਮੂੰਗਫਲੀ")
+
+    elif (
+        "Black" in soil_type or "काली" in soil_type or "ਕਾਲੀ" in soil_type
+    ):
+        return tr("Cotton","कपास","ਕਪਾਹ")
+
     elif humidity > 80 and rainfall > 150:
         return tr("Jute","जूट","ਜੂਟ")
-    elif P > 60 and K > 60:
-        return tr("Sugarcane","गन्ना","ਗੰਨਾ")
+
     else:
         return tr("Wheat","गेहूं","ਗੇਂਹੂ")
 
