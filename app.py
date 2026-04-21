@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-st.set_page_config(page_title="SoilSense AI+", layout="wide")
+st.set_page_config(page_title="SoilSense AI+ farmers kit", layout="wide")
 
 # Styling
 st.markdown("""
@@ -113,7 +113,7 @@ div[data-testid="metric-container"] {
 """, unsafe_allow_html=True)
 
 # Title
-st.title("🌱 SoilSense AI+")
+st.title("🌱 SoilSense AI+ farmers kit")
 
 # Language Selector
 language = st.selectbox(
