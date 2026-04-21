@@ -6,11 +6,13 @@ st.set_page_config(page_title="SoilSense AI+", layout="wide")
 # Styling
 st.markdown("""
 <style>
+
+/* Main background */
 .stApp {
     background-color: #0b1220;
 }
 
-/* Full page icon background */
+/* Full page faded agriculture icons */
 .stApp::before {
     content:
     "🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱 🌽 🌿 \A
@@ -18,9 +20,7 @@ st.markdown("""
      🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 \A
      🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱 🌽 🌿 \A
      🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾 \A
-     🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 \A
-     🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱 🌽 🌿 \A
-     🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾";
+     🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾";
     white-space: pre;
     position: fixed;
     top: 0;
@@ -36,18 +36,18 @@ st.markdown("""
     padding: 20px;
 }
 
-/* Keep main content above icons */
+/* Keep content above background */
 .main * {
     position: relative;
     z-index: 1;
 }
 
-/* Text colors */
-h1, h2, h3, label, p, div {
+/* Headings and text */
+h1, h2, h3, label, p, div, span {
     color: white !important;
 }
 
-/* Button styling */
+/* Buttons */
 .stButton>button {
     background-color: #2e7d32;
     color: white;
@@ -56,6 +56,37 @@ h1, h2, h3, label, p, div {
     width: 100%;
     border: none;
 }
+
+/* Input boxes */
+input, textarea {
+    background-color: #1e293b !important;
+    color: white !important;
+}
+
+/* Select boxes / Dropdowns */
+div[data-baseweb="select"] > div {
+    background-color: #1e293b !important;
+    color: white !important;
+    border-radius: 8px;
+}
+
+div[data-baseweb="select"] span {
+    color: white !important;
+}
+
+/* Number input boxes */
+div[data-testid="stNumberInput"] input {
+    background-color: #1e293b !important;
+    color: white !important;
+}
+
+/* Metric cards */
+div[data-testid="metric-container"] {
+    background-color: #1e293b;
+    padding: 15px;
+    border-radius: 12px;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
