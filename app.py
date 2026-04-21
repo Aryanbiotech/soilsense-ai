@@ -1,3 +1,22 @@
+import streamlit as st
+
+st.markdown("""
+<style>
+.main {
+    background-color: #f5f7f9;
+}
+h1 {
+    color: #1b5e20;
+}
+.stButton>button {
+    background-color: #2e7d32;
+    color: white;
+    border-radius: 10px;
+    height: 3em;
+    width: 100%;
+}
+</style>
+""", unsafe_allow_html=True)
 st.markdown("""
 <style>
 .main {
