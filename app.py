@@ -205,7 +205,7 @@ with col2:
     )
 
     rainfall = st.number_input(
-        tr("Rainfall (cm)","वर्षा (सेमी)","ਬਰਸਾਤ (ਸੈ.ਮੀ.)"),
+        tr("Rainfall (mm)","वर्षा (मिमी)","ਬਰਸਾਤ (ਮਿ.ਮੀ.)"),
         0,300,100
     )
 
@@ -219,6 +219,31 @@ with col2:
     previous_crop = st.selectbox(
         tr("Previous Crop","पिछली फसल","ਪਿਛਲੀ ਫਸਲ"),
         crop_options
+    )
+
+    soil_texture = st.selectbox(
+        tr("Soil Texture","मृदा बनावट","ਮਿੱਟੀ ਬਣਾਵਟ"),
+        [
+            tr("Sandy","रेतीली","ਰੇਤੀਲੀ"),
+            tr("Loamy","दोमट","ਦੋਮਟ"),
+            tr("Clayey","चिकनी","ਚਿਕਣੀ"),
+            tr("Silty","गादयुक्त","ਗਾਦ ਵਾਲੀ"),
+            tr("Sandy Loam","बलुई दोमट","ਰੇਤੀਲੀ ਦੋਮਟ"),
+            tr("Clay Loam","चिकनी दोमट","ਚਿਕਣੀ ਦੋਮਟ")
+        ]
+    )
+
+    soil_type = st.selectbox(
+        tr("Soil Type","मृदा प्रकार","ਮਿੱਟੀ ਕਿਸਮ"),
+        [
+            tr("Alluvial","जलोढ़","ਜਲੋੜ"),
+            tr("Black","काली","ਕਾਲੀ"),
+            tr("Red","लाल","ਲਾਲ"),
+            tr("Laterite","लेटेराइट","ਲੇਟਰਾਈਟ"),
+            tr("Mountain","पर्वतीय","ਪਹਾੜੀ"),
+            tr("Desert","मरुस्थली","ਰੇਗਿਸਤਾਨੀ"),
+            tr("Peaty","पीटी","ਪੀਟੀ")
+        ]
     )
 
 # Functions
