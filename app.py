@@ -61,32 +61,47 @@ with col2:
     )
 
 def recommend_crop():
-    if rainfall > 200:
+
+    if rainfall > 220 and humidity > 75:
         return "Rice"
-    elif ph < 6:
+
+    elif ph < 6.0 and temp < 28:
         return "Potato"
-    elif N > 80:
+
+    elif N > 90 and temp > 22:
         return "Maize"
-    elif humidity > 75:
+
+    elif humidity > 80 and rainfall > 150:
         return "Jute"
+
+    elif P > 60 and K > 60:
+        return "Sugarcane"
+
     else:
         return "Wheat"
 
+
 def soil_score():
+
     score = 100
 
-    if N < 40:
-        score -= 10
-    if P < 30:
-        score -= 10
-    if K < 30:
-        score -= 10
-    if ph < 5.5 or ph > 8:
+    if N < 60:
         score -= 15
-    if soc < 0.5:
+
+    if P < 40:
         score -= 15
-    if micro < 4:
+
+    if K < 40:
         score -= 15
+
+    if ph < 6 or ph > 7.5:
+        score -= 20
+
+    if soc < 0.75:
+        score -= 15
+
+    if micro < 6:
+        score -= 20
 
     return max(score,0)
 
