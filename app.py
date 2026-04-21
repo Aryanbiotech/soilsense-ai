@@ -61,11 +61,42 @@ h1, h2, h3, label, p, div {
 
 # Title
 st.title("🌱 SoilSense AI+")
-st.subheader("Bio Integrated Soil Decision System")
 
-# Voice Assistant
-st.subheader("🎤 Smart Assistant")
-voice_query = st.text_input("Ask about crop or soil")
+language = st.selectbox(
+    "Select Language / भाषा / ਭਾਸ਼ਾ",
+    ["English", "Hindi", "Punjabi"]
+)
+
+def tr(en, hi, pa):
+    if language == "Hindi":
+        return hi
+    elif language == "Punjabi":
+        return pa
+    return en
+
+st.subheader(
+    tr(
+        "Bio Integrated Soil Decision System",
+        "जैव एकीकृत मृदा निर्णय प्रणाली",
+        "ਜੈਵ ਇਕੀਕ੍ਰਿਤ ਮਿੱਟੀ ਫੈਸਲਾ ਪ੍ਰਣਾਲੀ"
+    )
+)
+
+st.subheader(
+    tr(
+        "🎤 Smart Assistant",
+        "🎤 स्मार्ट सहायक",
+        "🎤 ਸਮਾਰਟ ਸਹਾਇਕ"
+    )
+)
+
+voice_query = st.text_input(
+    tr(
+        "Ask about crop or soil",
+        "फसल या मिट्टी के बारे में पूछें",
+        "ਫਸਲ ਜਾਂ ਮਿੱਟੀ ਬਾਰੇ ਪੁੱਛੋ"
+    )
+)
 
 # Input Layout
 col1, col2 = st.columns(2)
