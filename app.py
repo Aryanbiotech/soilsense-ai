@@ -12,21 +12,16 @@ st.markdown("""
     background-color: #0b1220;
 }
 
-/* Full page faded agriculture icons */
+/* Full page faded icons */
 .stApp::before {
     content:
-    "🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱 🌽 🌿 \A
-     🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾 \A
-     🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 \A
-     🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱 🌽 🌿 \A
-     🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾 \A
-     🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾";
+    "🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 \A
+     🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾 🌿 \A
+     🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱 \A
+     🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿";
     white-space: pre;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     font-size: 34px;
     line-height: 3;
     word-spacing: 40px;
@@ -36,45 +31,55 @@ st.markdown("""
     padding: 20px;
 }
 
-/* Keep content above background */
+/* Keep content above */
 .main * {
     position: relative;
     z-index: 1;
 }
 
-/* Headings and text */
+/* Text */
 h1, h2, h3, label, p, div, span {
     color: white !important;
 }
 
 /* Buttons */
-.stButton>button {
-    background-color: #2e7d32;
-    color: white;
+.stButton > button {
+    background-color: #2e7d32 !important;
+    color: white !important;
     border-radius: 10px;
     height: 3em;
     width: 100%;
     border: none;
 }
 
-/* Input boxes */
+/* Inputs */
 input, textarea {
     background-color: #1e293b !important;
     color: white !important;
 }
 
-/* Select boxes / Dropdowns */
+/* Dropdown container */
 div[data-baseweb="select"] > div {
     background-color: #1e293b !important;
     color: white !important;
-    border-radius: 8px;
 }
 
-div[data-baseweb="select"] span {
+/* Selected text inside dropdown */
+div[data-baseweb="select"] * {
+    color: white !important;
+    fill: white !important;
+}
+
+/* Dropdown menu popup options */
+ul[role="listbox"] {
+    background-color: #1e293b !important;
+}
+
+ul[role="listbox"] li {
     color: white !important;
 }
 
-/* Number input boxes */
+/* Number inputs */
 div[data-testid="stNumberInput"] input {
     background-color: #1e293b !important;
     color: white !important;
@@ -82,7 +87,7 @@ div[data-testid="stNumberInput"] input {
 
 /* Metric cards */
 div[data-testid="metric-container"] {
-    background-color: #1e293b;
+    background-color: #1e293b !important;
     padding: 15px;
     border-radius: 12px;
 }
