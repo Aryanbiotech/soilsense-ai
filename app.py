@@ -10,37 +10,51 @@ st.markdown("""
     background-color: #0b1220;
 }
 
+/* Full page icon background */
 .stApp::before {
-    content: "🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽";
+    content:
+    "🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱 🌽 🌿 \A
+     🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾 \A
+     🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 \A
+     🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱 🌽 🌿 \A
+     🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾 \A
+     🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 \A
+     🌾 🌱 🥔 🌽 🌿 🌾 🌱 🥔 🌽 🌿 🌾 🌱 🌽 🌿 \A
+     🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾 🌿 🌱 🥔 🌽 🌾";
+    white-space: pre;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    font-size: 38px;
-    opacity: 0.08;
+    font-size: 34px;
+    line-height: 3;
+    word-spacing: 40px;
+    opacity: 0.07;
     z-index: 0;
     pointer-events: none;
-    line-height: 3;
-    word-spacing: 55px;
-    padding: 40px;
+    padding: 20px;
 }
 
+/* Keep main content above icons */
 .main * {
     position: relative;
     z-index: 1;
 }
 
+/* Text colors */
 h1, h2, h3, label, p, div {
     color: white !important;
 }
 
+/* Button styling */
 .stButton>button {
     background-color: #2e7d32;
     color: white;
     border-radius: 10px;
     height: 3em;
     width: 100%;
+    border: none;
 }
 </style>
 """, unsafe_allow_html=True)
